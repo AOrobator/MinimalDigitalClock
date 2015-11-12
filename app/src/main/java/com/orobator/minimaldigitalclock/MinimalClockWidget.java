@@ -5,6 +5,9 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.widget.RemoteViews;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 /**
  * Implementation of App Widget functionality.
  * App Widget Configuration implemented in {@link MinimalClockWidgetConfigureActivity MinimalClockWidgetConfigureActivity}
@@ -14,10 +17,14 @@ public class MinimalClockWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-        CharSequence widgetText = MinimalClockWidgetConfigureActivity.loadTitlePref(context, appWidgetId);
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.minimal_clock_widget);
-        views.setTextViewText(R.id.appwidget_text, widgetText);
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:MM");
+        views.setTextViewText(R.id.time_TextView, timeFormat.format(cal.getTime()));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM d");
+        views.setTextViewText(R.id.date_TextView, dateFormat.format(cal.getTime()));
+
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -32,14 +39,6 @@ public class MinimalClockWidget extends AppWidgetProvider {
         }
     }
 
-    @Override
-    public void onDeleted(Context context, int[] appWidgetIds) {
-        // When the user deletes the widget, delete the preference associated with it.
-        final int N = appWidgetIds.length;
-        for (int i = 0; i < N; i++) {
-            MinimalClockWidgetConfigureActivity.deleteTitlePref(context, appWidgetIds[i]);
-        }
-    }
 
     @Override
     public void onEnabled(Context context) {
