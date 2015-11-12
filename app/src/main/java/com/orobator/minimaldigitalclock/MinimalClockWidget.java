@@ -35,7 +35,7 @@ public class MinimalClockWidget extends AppWidgetProvider {
     public static RemoteViews getUpdatedView(Context context) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.minimal_clock_widget);
         Calendar cal = Calendar.getInstance();
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:MM:ss");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         views.setTextViewText(R.id.time_TextView, timeFormat.format(cal.getTime()));
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM d");
         views.setTextViewText(R.id.date_TextView, dateFormat.format(cal.getTime()));

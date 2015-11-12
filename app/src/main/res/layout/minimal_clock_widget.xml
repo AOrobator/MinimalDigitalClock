@@ -14,7 +14,7 @@
         android:layout_margin="8dp"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="24sp"
+        android:textSize="32sp"
         android:textStyle="bold|italic"
         tools:text="04:20" />
 
@@ -25,6 +25,7 @@
         android:layout_below="@id/time_TextView"
         android:gravity="center"
         android:textColor="@color/black"
+        android:textSize="24sp"
         tools:text="April 20, 2016" />
 
 </RelativeLayout>
